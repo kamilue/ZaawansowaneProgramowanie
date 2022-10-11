@@ -1,7 +1,8 @@
-def print_names(names):
-  for x in names:
-    print(x)
+def random_numbers(numbers):
+  for x in numbers:
+    return x * 2
 
-names = ["John", "Steve", "Rocky", "Kristen", "George"]
 
-print_names(names)
+numbers = [2, 5, 10, 20, 50]
+
+random_numbers(numbers)
