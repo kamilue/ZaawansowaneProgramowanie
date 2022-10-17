@@ -1,7 +1,8 @@
-def random_numbers(numbers):
-  list = [number * 2 for number in numbers]
-  return list
+def even_numbers(numbers):
+  for number in numbers:
+    if number % 2 == 0:
+      print(number)
 
-numbers = [2, 5, 10, 20, 50]
+numbers = list(range(92,111))
 
-random_numbers(numbers)
+even_numbers(numbers)
