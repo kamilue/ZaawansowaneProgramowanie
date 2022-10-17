@@ -1,8 +1,11 @@
-def even_numbers(numbers):
-  for number in numbers:
-    if number % 2 == 0:
-      print(number)
+def every_second_element(values):
+  second_values = []
+
+  for index in range(1, len(values), 2):
+    second_values.append(values[index])
+
+  print(second_values)
 
 numbers = list(range(92,111))
 
-even_numbers(numbers)
+every_second_element(numbers)
