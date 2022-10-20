@@ -1,11 +1,49 @@
-def check_if_even(number: int) -> bool:
-    even_number = number % 2 == 0
+class Property:
+    @property
+    def area(self):
+        return self.area()
 
-    if even_number:
-        print(f'Liczba parzysta')
-    else:
-        print(f'Liczba nieparzysta')
+    def rooms(self) -> int:
+        return self.rooms()
 
-number = 5
+    def price(self):
+        return self.price()
 
-check_if_even(number)
+    def address(self):
+        return self.address()
+
+    @area.setter
+    def area(self, value: str):
+        self.area = value
+
+    @rooms.setter
+    def rooms(self, value: int) -> int:
+        self.rooms = value
+
+    @price.setter
+    def price(self, value: str):
+        self.price = value
+
+    @address.setter
+    def address(self, value: str):
+        self.address = value
+
+
+class House(Property):
+    @property
+    def plot(self):
+        return self.plot()
+
+    @plot.setter
+    def plot(self, value: int) -> int:
+        self.plot = value
+
+
+class Flat(Property):
+    @property
+    def floor(self):
+        return self.floor()
+
+    @floor.setter
+    def floor(self, value):
+        self.floor = value
