@@ -1,4 +1,4 @@
-from Classes.Student import Student
+from utils.Student import Student
 
 marks = [1, 2, 3, 5, 2, 4, 5, 6]
 marks2 = [51, 55, 53, 22, 67, 60]
