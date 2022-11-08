@@ -1,10 +1,6 @@
-def check_if_equal_parameters(value: list, number: int) -> bool:
-    for i in range(len(value)):
-        if value[i] == number:
-            return True
-        return False
+from CommonFunctions.check_if_equal_parameters import check_if_equal_parameters
 
-list = 1,2,3,45
+list = 1, 2, 3, 45
 number = 1
 
-check_if_equal_parameters(list,number)
+check_if_equal_parameters(list, number)
