@@ -1,8 +1,3 @@
-def check_sum(number1: int, number2: int, number3: int) -> bool:
-    sum = number1 + number2
-    if sum >= number3:
-        return True
-    else:
-        return False
+from CommonFunctions.check_sum import check_sum
 
-check_sum(1,2,4)
+check_sum(1, 2, 4)
