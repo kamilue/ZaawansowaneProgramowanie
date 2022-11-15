@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 api = Api(app)
 
-df = pd.read_csv(r'C:\Users\Kamil Plekaniec\Downloads\movies.csv')
+movies = pd.read_csv(r'C:\Users\Kamil Plekaniec\Downloads\movies.csv')
 
 
 class HelloWorld(Resource):
@@ -17,4 +17,3 @@ api.add_resource(HelloWorld, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
-    print(df)
