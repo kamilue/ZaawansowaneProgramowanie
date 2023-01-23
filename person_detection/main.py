@@ -23,7 +23,9 @@ def detect_people(input_file):
         if not ret:
             break
 
-        boxes, _ = hog.detectMultiScale(frame, winStride=(8, 8), padding=(32, 32), scale=1.05)
+        frame = cv2.resize(frame, (640, 480))  # zmniejszenie rozdzielczości klatek
+        boxes, _ = hog.detectMultiScale(frame, winStride=(8, 8), padding=(32, 32), scale=1.1)
+        # zwiększenie skali detekcji
         for (x, y, w, h) in boxes:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
             people_count += 1
@@ -31,14 +33,14 @@ def detect_people(input_file):
         cv2.imshow("People detection", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
+    cv2.destroyAllWindows()
     end_time = time.time()
     cap.release()
-    cv2.destroyAllWindows()
-
-    # Wyświetlenie wyniku
     print("Czas detekcji: {:.2f}s".format(end_time - start_time))
     print("Liczba wykrytych osób: {}".format(people_count))
+    root = tk.Tk()
+    root.withdraw()
+    root.destroy()
 
 
 def open_file_explorer():
