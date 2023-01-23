@@ -1,18 +1,51 @@
 import cv2
+import time
+import tkinter as tk
+from tkinter import filedialog
 
-image = cv2.imread('people1.jpg')
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-classifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fullbody.xml')
+def detect_people(input_file):
+    # Wczytanie pliku
+    cap = cv2.VideoCapture(input_file)
+    if not cap.isOpened():
+        print("Nie można otworzyć pliku")
+        return
 
-bboxes = classifier.detectMultiScale(gray, 1.3, 5)
+    # Ustawienie klasyfikatora
+    hog = cv2.HOGDescriptor()
+    hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-for (x, y, w, h) in bboxes:
-    cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    # Pętla przez klatki w filmie lub pojedyncze zdjęcie
+    start_time = time.time()
+    people_count = 0
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
 
-count = len(bboxes)
-print(f'{count} people detected')
+        boxes, _ = hog.detectMultiScale(frame, winStride=(8, 8), padding=(32, 32), scale=1.05)
+        for (x, y, w, h) in boxes:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+            people_count += 1
 
-cv2.imshow('Image', image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+        cv2.imshow("People detection", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    end_time = time.time()
+    cap.release()
+    cv2.destroyAllWindows()
+
+    # Wyświetlenie wyniku
+    print("Czas detekcji: {:.2f}s".format(end_time - start_time))
+    print("Liczba wykrytych osób: {}".format(people_count))
+
+
+def open_file_explorer():
+    root = tk.Tk()
+    root.withdraw()
+    input_file = filedialog.askopenfilename()
+    detect_people(input_file)
+
+
+open_file_explorer()
