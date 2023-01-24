@@ -23,19 +23,27 @@ def detect_people(input_file):
                                             padding=(4, 4),
                                             scale=1.05)
 
+        start_time = time.time()
+        people_count = 0
         # Drawing the regions in the Image
         for (x, y, w, h) in regions:
             cv2.rectangle(image, (x, y),
                           (x + w, y + h),
                           (0, 0, 255), 2)
+            people_count += 1
 
         # Showing the output Image
-        cv2.imshow("Image", image)
+        cv2.imshow("People detection", image)
+        end_time = time.time()
         cv2.waitKey(0)
-
+        # Wyświetlenie wyniku
+        print("Czas detekcji: {:.2f}s".format(end_time - start_time))
+        print("Liczba wykrytych osób: {}".format(people_count))
         cv2.destroyAllWindows()
     else:
         cap = cv2.VideoCapture(input_file)
+        start_time = time.time()
+        people_count = 0
         while cap.isOpened():
             ret, image = cap.read()
             if ret:
@@ -48,21 +56,28 @@ def detect_people(input_file):
                                                     scale=1.05)
 
                 # Drawing the regions in the
+
                 # Image
                 for (x, y, w, h) in regions:
                     cv2.rectangle(image, (x, y),
                                   (x + w, y + h),
                                   (0, 0, 255), 2)
+                    people_count += 1
 
                 # Showing the output Image
-                cv2.imshow("Image", image)
+                cv2.imshow("People detection", image)
                 if cv2.waitKey(25) & 0xFF == ord('q'):
                     break
             else:
                 break
 
+        end_time = time.time()
         cap.release()
         cv2.destroyAllWindows()
+
+        # Wyświetlenie wyniku
+        print("Czas detekcji: {:.2f}s".format(end_time - start_time))
+        print("Liczba wykrytych osób: {}".format(people_count))
 
 
 def open_file_explorer():
