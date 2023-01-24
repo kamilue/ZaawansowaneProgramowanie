@@ -22,8 +22,8 @@ def detect_people(input_file):
         ret, frame = cap.read()
         if not ret:
             break
-
-        boxes, _ = hog.detectMultiScale(frame, winStride=(8, 8), padding=(32, 32), scale=1.05)
+        frame = cv2.resize(frame, (640, 480))
+        boxes, _ = hog.detectMultiScale(frame, winStride=(8, 8), padding=(32, 32), scale=1.45)
         for (x, y, w, h) in boxes:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
             people_count += 1
